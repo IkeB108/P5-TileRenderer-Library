@@ -22,6 +22,24 @@ function setup(){
   myMap = new TileRenderer(myMapJSON);
 }
 ```
+## Properties
+The TileRenderer object comes with the following properties:
+```javascript
+myMap.graphics //An array of graphics created with getGraphic() and getTextGraphic()
+myMap.layers //An array of layers imported from LVL LVL. The layer objects will be slightly different from the layer objects in your JSON file
+myMap.colorPalette //An array of p5 color objects. Palette is imported from LVL LVL
+myMap.sheet //A p5 graphic that displays all the tiles in your tileset (see below)
+myMap.sheetRenderComplete //Boolean storing whether the sheet graphic has fully rendered. No other graphics will be drawn until this is done.
+myMap.sheetJSON //The JSON file imported from LVL LVL 
+myMap.sheetTileCount //Integer -- how many tiles are in your tileset
+myMap.tileSize //The width and height of each tile in pixels
+myMap.rendersPerFrame //An integer that stores how many tiles were rendered in the last frame (use for debugging)
+myMap.alphabet //String -- If you plan to use text graphics, set this to the name of the tileset you used in LVL LVL
+```
+### myMap.sheet
+This is what the `myMap.sheet` graphic looks like. You can draw it in your sketch with `image()`
+![Capture](https://user-images.githubusercontent.com/56776763/180670499-76f6824e-73bf-4701-b297-82fc2e752dcb.PNG)
+
 ## Example
 See this example run live [here](https://ikeb108.github.io/P5-TileRenderer-Library/Example/).
 
