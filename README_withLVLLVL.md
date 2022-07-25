@@ -62,14 +62,14 @@ To see this example project in LVL LVL, download the JSON file [here](Example/my
 function preload(){
   //Load a json file that was exported from https://lvllvl.com/
   //( you can also make one from scratch without LVLLVL )
-  myTileRendererJSON = loadJSON("myTileRenderer.json")
+  myLvlLvlJSON = loadJSON("LvlLvlExport.json")
 }
 
 function setup(){
   createCanvas(500,500)
   
   //Create a new tile renderer using the json from https://lvllvl.com/
-  myTileRenderer = new TileRenderer(myTileRendererJSON);
+  myTileRenderer = new TileRenderer(myLvlLvlJSON);
   
   //The tile renderer automatically creates layer objects from the json data
   //and stores them in an array called layers.
@@ -92,7 +92,7 @@ function draw(){
   scale(2); noSmooth();
   
   
-  // Draw a light green background behind the map graphic
+  // Draw a light green background behind the map
   // ===============================================
   fill( myTileRenderer.colorPalette[0] )
   // Get the dimensions of a graphic from myTileRenderer (doesn't matter which, they're all the same)
@@ -113,7 +113,6 @@ function draw(){
     }
   }
   
-  
   //Create a text graphic that displays the framerate
   //=========================
   myTileRenderer.alphabet = "Commodore 64" //Tell the tile renderer which tileset we used in lvllvl.com so that it knows which tile indeces correspond to which letters (only needs to be done once)
@@ -133,7 +132,6 @@ function draw(){
   
   myTileRenderer.deleteUnusedGraphics(); //This feature helps clear out unused graphics (especially important when creating text graphics).
 }
-
 ```
 ## Unsupported LVL LVL Features
 - Rotating and flipping tiles
