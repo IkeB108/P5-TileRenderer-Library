@@ -75,7 +75,17 @@ graphicSettingsObject = {
 ```
 ## Graphics Properties
 Properties of graphics objects stored in the `graphics` array:
+```javascript
+myGraphic.name //String; Name of the graphic that was given when this graphic was created
+myGraphic.used //Boolean storing whether this graphic's update() method has been called in the current frame
+myGraphic.renderProgress //Integer; how many tiles in this graphic have rendered so far
+myGraphic.renderComplete //Boolean; whether the graphic has finished rendering
+myGraphic.tileChangeQueue //Array of tile changes that were made with the setTile() method
+myGraphic.settings //Object containing all the settings that were given when this graphic was created
+myGraphic.layerObject //The layer object that was given when this graphic was created
 
+// ...in addition to the properties that all p5 graphics objects have
+```
 ## Graphics Methods
 Methods of graphics objects stored in the `graphics` array:
 
