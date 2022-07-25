@@ -22,20 +22,8 @@ function setup(){
   myTileRenderer = new TileRenderer(myLvlLvlJSON);
 }
 ```
-## Drawing Graphics
-In your draw loop...
-1. Create or retrieve a graphic using [`getGraphic()`](README_withLVLLVL.md#getGraphic)
-2. Call the graphic's `update()` method so that it will start or continue rendering
-3. Draw the graphic to the canvas using p5's `image()` function
-```javascript
-//Example
-function draw(){
-/*Step 1*/  let walkwaysGraphic = myTileRenderer.getGraphic("walkways", walkwaysLayer, walkwaysSettings )
-/*Step 2*/  walkwaysGraphic.update()
-/*Step 3*/  image(walkwaysGraphic, 0, 0)
-}
-```
-
+## How To...
+- [How to draw graphics](Instructions_HowTo.md#how-to-draw-graphics)
 ## TileRenderer Properties
 The TileRenderer object comes with the following properties:
 ```javascript
@@ -46,7 +34,7 @@ myTileRenderer.sheet //A p5 graphic that displays all the tiles in your tileset 
 myTileRenderer.sheetRenderComplete //Boolean storing whether the sheet graphic has fully rendered. No other graphics will be drawn until this is done.
 myTileRenderer.sheetJSON //The JSON file imported from LVL LVL 
 myTileRenderer.sheetTileCount //Integer -- how many tiles are in your tileset
-myTileRenderer.tileSize //The width and height of each tile in pixels
+myTileRenderer.tileSize //The width and height of each tile in pixels (tiles must be square)
 myTileRenderer.rendersPerFrame //An integer that stores how many tiles were rendered in the last frame (use for debugging)
 myTileRenderer.alphabet //String -- If you plan to use text graphics, set this to the name of the tileset you used in LVL LVL
 ```
@@ -54,12 +42,21 @@ myTileRenderer.alphabet //String -- If you plan to use text graphics, set this t
 This is an example of what the `myTileRenderer.sheet` graphic looks like. You can draw it in your sketch with `image()`
 ![Capture](https://user-images.githubusercontent.com/56776763/180670499-76f6824e-73bf-4701-b297-82fc2e752dcb.PNG)
 
+The sheet graphic comes with useful properties of its own:
+```javascript
+myTileRenderer.sheet.positionOf //An object storing the x y coordinates of all tiles in the sheet graphic. Use like so:
+// console.log(myTileRenderer.sheet.positionOf[0]) //Returns the coordinates of the 0th tile: {x: 0, y: 0}
+myTileRenderer.sheet.rowSize //Size (in tiles) of rows in the tile sheet (should be 10 if importing from lvl lvl)
+myTileRenderer.sheet.columnSize //Size (in tiles) of columns in the tile sheet
+myTileRenderer.sheet.renderProgress //How many tiles have been rendered in the sheet so far (tiles only need to render once)
+myTileRenderer.sheet.tilesPerFrame //How many tiles to draw to the sheet per frame (defaults to 50)
+```
 ## TileRenderer Methods
 ### getGraphic()
 ```javascript
 myTileRenderer.getGraphic( name, layerObject, [graphicSettingsObject] )
 ```
-Creates a new p5 graphic named `name` and adds it to the TileRenderer's `graphics` array. Or, if a graphic named `name` already exists, it just retrieves that graphic.
+Creates a new p5 graphic named `name` and adds it to the TileRenderer's `graphics` array. Or, if a graphic named `name` already exists, it just retrieves that graphic. The tiles described in `layerObject` will be drawn to this graphic when its `update()` method is called.
 
 - `name`: String. Name of the graphic to create/retrieve
 - `layerObject`: Object. A layer from the TileRenderer's `layers` array (or one imported with `importLayers()`)
@@ -73,6 +70,12 @@ graphicSettingsObject = {
   height: [default is calculated based on tileSize], //The desired height of the graphic in pixels
 }
 ```
+## Graphics Properties
+Properties of graphics objects stored in the `graphics` array:
+
+## Graphics Methods
+Methods of graphics objects stored in the `graphics` array:
+
 ## Example Sketch
 See this example run live [here](https://ikeb108.github.io/P5-TileRenderer-Library/Example/).
 
