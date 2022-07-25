@@ -23,6 +23,8 @@ function setup(){
 }
 ```
 ## How To...
+![Capture](https://user-images.githubusercontent.com/56776763/180682856-cc484d52-4551-4bb3-8644-a7a92b1935c9.PNG)
+
 - [How to draw graphics](Instructions_HowTo.md#how-to-draw-graphics)
 ## TileRenderer Properties
 The TileRenderer object comes with the following properties:
@@ -40,6 +42,7 @@ myTileRenderer.alphabet //String -- If you plan to use text graphics, set this t
 ```
 ### `sheet` property:
 This is an example of what the `myTileRenderer.sheet` graphic looks like. You can draw it in your sketch with `image()`
+
 ![Capture](https://user-images.githubusercontent.com/56776763/180670499-76f6824e-73bf-4701-b297-82fc2e752dcb.PNG)
 
 The sheet graphic comes with useful properties of its own:
