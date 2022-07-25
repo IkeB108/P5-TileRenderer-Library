@@ -59,9 +59,21 @@ This is an example of what the `myTileRenderer.sheet` graphic looks like. You ca
 ```javascript
 myTileRenderer.getGraphic( name, layerObject, [graphicSettingsObject] )
 ```
-Creates a new p5 graphic.
+Creates a new p5 graphic named `name` and adds it to the TileRenderer's `graphics` array. Or, if a graphic named `name` already exists, it just retrieves that graphic.
 
-## Example
+- `name`: String. Name of the graphic to create/retrieve
+- `layerObject`: Object. A layer from the TileRenderer's `layers` array (or one imported with `importLayers()`)
+- `graphicSettingsObject`: Object. Stores your preferred settings for this graphic. It can have any of the properties below (any properties not included default to the values shown below)
+```javascript
+graphicSettingsObject = {
+  tilesPerFrame: 10, //How many tiles from this graphic will be rendered to the screen each frame
+  protected: false, //When true, graphic will not be deleted by the TileRenderer's deleteUnusedGraphics() method.
+  tileSize: [defaults to the tile size in the sheet graphic],  //The desired width and height of tiles in this graphic in pixels
+  width: [default is calculated based on tileSize], //The desired width of the graphic in pixels
+  height: [default is calculated based on tileSize], //The desired height of the graphic in pixels
+}
+```
+## Example Sketch
 See this example run live [here](https://ikeb108.github.io/P5-TileRenderer-Library/Example/).
 
 To see this example project in LVL LVL, download the JSON file [here](Example/myTileRenderer.json) and import it to LVL LVL.
@@ -145,7 +157,7 @@ function draw(){
   - LVL LVL does not include this data when exporting to JSON.
   - However, you can rotate and flip and redraw tiles as much as you like in LVL LVL's **tile editor**.
 - Tile background colors
-  - This is intentionally unsupported because it would require drawing a `rect()` behind every tile, which is very inefficient and not appropriate for most projects.
+  - This is intentionally unsupported because it would require drawing a `rect()` behind every tile, which is very inefficient and not appropriate for most sketches.
   - However, you can draw one `rect()` behind the entire layer to do backgrounds (see the provided example).
 - Multiple Frames
   - This library assumes your project has only one frame for simplicity.
