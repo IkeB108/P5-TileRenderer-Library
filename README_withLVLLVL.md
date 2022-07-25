@@ -22,14 +22,21 @@ function setup(){
   myTileRenderer = new TileRenderer(myLvlLvlJSON);
 }
 ```
-## Creating New Graphics
+## Drawing Graphics
+In your draw loop...
+1. Create or retrieve a graphic using [`getGraphic()`](README_withLVLLVL.md#unsupported-lvl-lvl-features)
+2. Call the graphic's `update()` method so that it will start or continue rendering
+3. Draw the graphic to the canvas using p5's `image()` function
 ```javascript
-myTileRenderer.getGraphic( name, layerObject, [graphicSettingsObject] )
-
-//Example:
-myGraphic = myTileRenderer.getGraphic( "Layer 0", myTileRenderer.layers["Layer 0"], { tilesPerFrame: 1 })
+//Example
+function draw(){
+/*Step 1*/  let walkwaysGraphic = myTileRenderer.getGraphic("walkways", walkwaysLayer, walkwaysSettings )
+/*Step 2*/  walkwaysGraphic.update()
+/*Step 3*/  image(walkwaysGraphic, 0, 0)
+}
 ```
-## Properties
+
+## TileRenderer Properties
 The TileRenderer object comes with the following properties:
 ```javascript
 myTileRenderer.graphics //An array of graphics created with getGraphic() and getTextGraphic()
@@ -47,7 +54,7 @@ myTileRenderer.alphabet //String -- If you plan to use text graphics, set this t
 This is an example of what the `myTileRenderer.sheet` graphic looks like. You can draw it in your sketch with `image()`
 ![Capture](https://user-images.githubusercontent.com/56776763/180670499-76f6824e-73bf-4701-b297-82fc2e752dcb.PNG)
 
-## Methods
+## TileRenderer Methods
 ### getGraphic()
 ```javascript
 myTileRenderer.getGraphic( name, layerObject, [graphicSettingsObject] )
