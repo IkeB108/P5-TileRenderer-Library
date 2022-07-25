@@ -8,7 +8,7 @@ In LVL LVL, click Export --> JSON. Use the following settings (should be default
 
 Include the tile renderer script in your `index.html` head:
 ```javascript
-<script src="libraries/tileset.js" type="text/javascript"></script>
+<script src="tileRenderer.js" type="text/javascript"></script>
 ```
 In your sketch's `preload()` function, load the JSON file:
 ```javascript
