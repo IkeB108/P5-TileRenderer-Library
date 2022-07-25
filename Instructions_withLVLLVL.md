@@ -74,7 +74,7 @@ graphicSettingsObject = {
 }
 ```
 ## Graphics Properties
-Properties of graphics objects stored in the `graphics` array:
+Properties of graphics objects stored in `graphics`:
 ```javascript
 myGraphic.name //String; Name of the graphic that was given when this graphic was created
 myGraphic.used //Boolean storing whether this graphic's update() method has been called in the current frame
