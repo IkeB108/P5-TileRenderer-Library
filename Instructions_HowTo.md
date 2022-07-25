@@ -7,8 +7,8 @@ In your draw loop...
 ```javascript
 //Example
 function draw(){
-/*Step 1*/  let walkwaysGraphic = myTileRenderer.getGraphic("walkways", walkwaysLayer, walkwaysSettings )
-/*Step 2*/  walkwaysGraphic.update()
-/*Step 3*/  image(walkwaysGraphic, 0, 0)
+  /*Step 1*/  let walkwaysGraphic = myTileRenderer.getGraphic("walkways", walkwaysLayer, walkwaysSettings )
+  /*Step 2*/  walkwaysGraphic.update()
+  /*Step 3*/  image(walkwaysGraphic, 0, 0)
 }
 ```
