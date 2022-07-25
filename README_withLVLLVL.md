@@ -1,5 +1,5 @@
 # P5 TileRenderer Library with LVL LVL
-Take note of the listed [Unsupported LVL LVL Features](Renderer-Library/blob/main/README_withLVLLVL.md#unsupported-lvl-lvl-features).
+Take note of the listed [Unsupported LVL LVL Features](README_withLVLLVL.md#unsupported-lvl-lvl-features).
 ## First Steps
 In LVL LVL, click Export --> JSON. Use the following settings (should be defaults).
 
