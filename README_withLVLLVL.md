@@ -24,7 +24,7 @@ function setup(){
 ```
 ## Drawing Graphics
 In your draw loop...
-1. Create or retrieve a graphic using [`getGraphic()`](README_withLVLLVL.md#unsupported-lvl-lvl-features)
+1. Create or retrieve a graphic using [`getGraphic()`](README_withLVLLVL.md#getGraphic)
 2. Call the graphic's `update()` method so that it will start or continue rendering
 3. Draw the graphic to the canvas using p5's `image()` function
 ```javascript
