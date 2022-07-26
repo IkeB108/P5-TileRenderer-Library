@@ -1,10 +1,12 @@
 # P5 TileRenderer Library with LVL LVL
 Take note of the listed [Unsupported LVL LVL Features](README_withLVLLVL.md#unsupported-lvl-lvl-features).
+
+
+
 ## First Steps
 In LVL LVL, click Export --> JSON. Use the following settings (should be defaults).
 
 ![lvllvl_settings](https://user-images.githubusercontent.com/56776763/180666857-cf1057f0-90c7-4c5d-9a8e-3167779d4033.PNG)
-
 
 Include the tile renderer script in your `index.html` head:
 ```javascript
@@ -22,10 +24,17 @@ function setup(){
   myTileRenderer = new TileRenderer(myLvlLvlJSON);
 }
 ```
+
+
+
 ## How To...
 ![Capture](https://user-images.githubusercontent.com/56776763/180682856-cc484d52-4551-4bb3-8644-a7a92b1935c9.PNG)
 
 - [How to draw graphics](Instructions_HowTo_withLVLLVL.md#how-to-draw-graphics)
+
+
+
+
 ## TileRenderer Properties
 The TileRenderer object comes with the following properties:
 ```javascript
@@ -54,6 +63,10 @@ myTileRenderer.sheet.columnSize //Size (in tiles) of columns in the tile sheet
 myTileRenderer.sheet.renderProgress //How many tiles have been rendered in the sheet so far (tiles only need to render once)
 myTileRenderer.sheet.tilesPerFrame //How many tiles to draw to the sheet per animation frame (defaults to 50)
 ```
+
+
+
+
 ## TileRenderer Methods
 ### `getGraphic()`
 ```javascript
@@ -63,7 +76,7 @@ Creates a new p5 graphic named `name` and adds it to the TileRenderer's `graphic
 
 - `name`: String. Name of the graphic to create/retrieve
 - `layerObject`: Object. A layer from the TileRenderer's `layers` array (or one imported with `importLayers()`)
-- `graphicSettingsObject`: Object. Stores your preferred settings for this graphic. It can have any of the properties below (any properties not included default to the values shown below)
+- `graphicSettingsObject`: Optional Object. Stores your preferred settings for this graphic. It can have any of the properties below (any properties not included default to the values shown below)
 ```javascript
 graphicSettingsObject = {
   tilesPerFrame: 10, //How many tiles from this graphic will be rendered to the screen each animation frame
@@ -79,7 +92,7 @@ myTileRenderer.getTextGraphic( textString, [graphicSettingsObject] )
 ```
 Creates a new p5 graphic that will render the text in `textString`, and adds it to the TileRenderer's `graphics` object. Or, if a text graphic containing the text in `textString` already exists, it just returns that graphic.
 - `textString`: String. The text to render in the text graphic
-- `graphicSettingsObject`: An object with all the same settings options when calling `getGraphic()`, but with two additions:
+- `graphicSettingsObject`: Optional. An object with all the same settings options when calling `getGraphic()`, but with two additions:
 ```javascript
 graphicSettingsObject = {
   textColor: __, //REQUIRED: index of the desired text color in the color palette
@@ -91,6 +104,43 @@ IMPORTANT NOTE: The `getTextGraphic` method requires the TileRenderer's `alphabe
 //Example...
 myTileRenderer.alphabet = "Commodore 64"
 ```
+### `setGraphicsToUnused() and deleteUnusedGraphics()`
+See [here](Instructions_HowTo_withLVLLVL.md#important-how-to-prevent-memory-leakage-with-deleteunusedgraphics)
+### `deleteGraphic()`
+```javascript
+myTileRenderer.deleteGraphic( graphicName )
+```
+Deletes the graphic named `graphicName` from the `graphics` object. It is recommended to use this method instead of trying to delete the graphic yourself.
+### `sheetIndexOf()`
+```javascript
+myTileRenderer.sheetIndexOf( character )
+```
+Returns the index (in the [tilesheet](Instructions_withLVLLVL.md#the-tilesheet)) of the given character. This method requires the TileRenderer's `alphabet` property to be set to the name of the tileset used in LVL LVL.
+- `character`: A string of length 1
+### `getLayer()`
+```javascript
+myTileRenderer.getLayer( layerLabelOrIndex )
+```
+Returns the layer object from LVL LVL that is labelled (or has an index of) `layerLabelOrIndex`
+- `layerLabelOrIndex`: A string (name of the layer) or an integer (index of the layer in the TileRenderer's `layers` array)
+### `importLayers()`
+```javascript
+myTileRenderer.importLayers( layersObject )
+```
+Imports an object that was exported with the TileRenderer's `exportLayers()` method (not meant to import content directly from LVL LVL).
+
+Use this if you want to use a map made with LVL LVL, but with a [tilesheet](Instructions_withLVLLVL.md#the-tilesheet) that is not from LVL LVL.
+
+### `exportLayers()`
+```javascript
+myTileRenderer.exportLayers( fileName )
+```
+Exports information about the TileRenderer's layers to a JSON file named `fileName`.
+- `fileName`: String. Name of the json file that will be downloaded.
+
+
+
+
 ## Graphics Properties
 Properties of graphics objects stored in `graphics`:
 ```javascript
@@ -104,6 +154,10 @@ myGraphic.layerObject //The layer object that was given when this graphic was cr
 
 // ...in addition to the properties that all p5 graphics objects have
 ```
+
+
+
+
 ## Graphics Methods
 Methods of graphics objects stored in `graphics`:
 ### `update()`
@@ -117,7 +171,7 @@ myGraphic.setTile( tileIndexInGraphic, propertiesOfNewTile )
 //or...
 myGraphic.setTile( tileX, tileY, propertiesOfNewTile )
 ```
-In the graphic, sets the tile of index `tileIndexInGraphic` (or at the coordinates `tileX, tileY`) to have the properties in `propertiesOfNewTile`
+In the graphic, sets the tile at index `tileIndexInGraphic` (or at the coordinates `tileX, tileY`) to have the properties in `propertiesOfNewTile`
 
 - `tileIndexInGraphic`: Integer. Index of the tile you wish to change
 - `tileX`: Integer. X coordinate of the tile you wish to change
@@ -135,7 +189,7 @@ myGraphic.getTile( tileIndexInGraphic )
 //or...
 myGraphic.getTile( tileX, tileY )
 ```
-Returns an object (formatted like below) containing data about the tile of index `tileIndexInGraphic` or at the coordinates `tileX, tileY`
+Returns an object (formatted like below) containing data about the tile at index `tileIndexInGraphic` or at the coordinates `tileX, tileY`
 ```javascript
 propertiesOfNewTile = {
   sheetIndex: __, //Integer. index (in the tilesheet) of the character this tile is set to
@@ -160,6 +214,9 @@ myGraphic.coordinatesToIndex( tileX, tileY )
 Given the x and y coordinates of a tile, returns the index of that tile in the graphic.
 - `tileX`: X coordinate of a tile
 - `tileY`: Y coordinate of a tile
+
+
+
 
 ## Example Sketch
 See this example run live [here](https://ikeb108.github.io/P5-TileRenderer-Library/Example/).
@@ -240,6 +297,10 @@ function draw(){
   myTileRenderer.deleteUnusedGraphics(); //This feature helps clear out unused graphics (especially important when creating text graphics).
 }
 ```
+
+
+
+
 ## Unsupported LVL LVL Features
 - Rotating and flipping tiles
   - LVL LVL does not include this data when exporting to JSON.
