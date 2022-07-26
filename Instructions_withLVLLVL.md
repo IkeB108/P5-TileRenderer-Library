@@ -37,7 +37,7 @@ myTileRenderer.sheetRenderComplete //Boolean storing whether the sheet graphic h
 myTileRenderer.sheetJSON //The JSON file imported from LVL LVL 
 myTileRenderer.sheetTileCount //Integer -- how many tiles are in your tileset
 myTileRenderer.tileSize //The width and height of each tile in pixels (tiles must be square)
-myTileRenderer.rendersPerFrame //An integer that stores how many tiles were rendered in the last frame (use for debugging)
+myTileRenderer.rendersPerFrame //An integer that stores how many tiles were rendered in the last animation frame (you can check this for debugging purposes)
 myTileRenderer.alphabet //String -- If you plan to use text graphics, set this to the name of the tileset you used in LVL LVL
 ```
 ### The tilesheet:
@@ -52,32 +52,50 @@ myTileRenderer.sheet.positionOf //An object storing the x y coordinates of all t
 myTileRenderer.sheet.rowSize //Size (in tiles) of rows in the tile sheet (should be 10 if importing from lvl lvl)
 myTileRenderer.sheet.columnSize //Size (in tiles) of columns in the tile sheet
 myTileRenderer.sheet.renderProgress //How many tiles have been rendered in the sheet so far (tiles only need to render once)
-myTileRenderer.sheet.tilesPerFrame //How many tiles to draw to the sheet per frame (defaults to 50)
+myTileRenderer.sheet.tilesPerFrame //How many tiles to draw to the sheet per animation frame (defaults to 50)
 ```
 ## TileRenderer Methods
 ### `getGraphic()`
 ```javascript
 myTileRenderer.getGraphic( name, layerObject, [graphicSettingsObject] )
 ```
-Creates a new p5 graphic named `name` and adds it to the TileRenderer's `graphics` array. Or, if a graphic named `name` already exists, it just retrieves that graphic. The tiles described in `layerObject` will be drawn to this graphic when its `update()` method is called.
+Creates a new p5 graphic named `name` and adds it to the TileRenderer's `graphics` object. Or, if a graphic named `name` already exists, it just returns that graphic. The tiles described in `layerObject` will be drawn to this graphic when its `update()` method is called.
 
 - `name`: String. Name of the graphic to create/retrieve
 - `layerObject`: Object. A layer from the TileRenderer's `layers` array (or one imported with `importLayers()`)
 - `graphicSettingsObject`: Object. Stores your preferred settings for this graphic. It can have any of the properties below (any properties not included default to the values shown below)
 ```javascript
 graphicSettingsObject = {
-  tilesPerFrame: 10, //How many tiles from this graphic will be rendered to the screen each frame
+  tilesPerFrame: 10, //How many tiles from this graphic will be rendered to the screen each animation frame
   protected: false, //When true, graphic will not be deleted by the TileRenderer's deleteUnusedGraphics() method.
   tileSize: [defaults to the tile size in the sheet graphic],  //The desired width and height of tiles in this graphic in pixels
   width: [default is calculated based on tileSize], //The desired width of the graphic in pixels
   height: [default is calculated based on tileSize], //The desired height of the graphic in pixels
 }
 ```
+### `getTextGraphic()`
+```javascript
+myTileRenderer.getTextGraphic( textString, [graphicSettingsObject] )
+```
+Creates a new p5 graphic that will render the text in `textString`, and adds it to the TileRenderer's `graphics` object. Or, if a text graphic containing the text in `textString` already exists, it just returns that graphic.
+- `textString`: String. The text to render in the text graphic
+- `graphicSettingsObject`: An object with all the same settings options when calling `getGraphic()`, but with two additions:
+```javascript
+graphicSettingsObject = {
+  textColor: __, //REQUIRED: index of the desired text color in the color palette
+  widthInCharacters: __, //Optional: For word wrapping, how many characters wide the text is allowed to be (if not set, there will be no word wrapping)
+}
+```
+IMPORTANT NOTE: The `getTextGraphic` method requires the TileRenderer's `alphabet` property to be set to the name of the tileset used in LVL LVL:
+```javascript
+//Example...
+myTileRenderer.alphabet = "Commodore 64"
+```
 ## Graphics Properties
 Properties of graphics objects stored in `graphics`:
 ```javascript
 myGraphic.name //String; Name of the graphic that was given when this graphic was created
-myGraphic.used //Boolean storing whether this graphic's update() method has been called in the current frame
+myGraphic.used //Boolean storing whether this graphic's update() method has been called sometime in the current animation frame
 myGraphic.renderProgress //Integer; how many tiles in this graphic have rendered so far
 myGraphic.renderComplete //Boolean; whether the graphic has finished rendering
 myGraphic.tileChangeQueue //Array of tile changes that were made with the setTile() method
@@ -230,7 +248,7 @@ function draw(){
   - This is intentionally unsupported because it would require drawing a `rect()` behind every tile, which is very inefficient and not appropriate for most sketches.
   - However, you can draw one `rect()` behind the entire layer to do backgrounds (see the provided example).
 - Multiple Frames
-  - This library assumes your project has only one frame for simplicity.
+  - This library assumes your LVL LVL project has only one frame for simplicity.
   - However, you could create multiple instances of `TileRenderer` to use multiple frames.
 - Non-square tilesets
   - Your chosen tile set must have square tiles (sorry)
