@@ -3,6 +3,9 @@
 - [How to Draw Graphics](Instructions_HowTo_withLVLLVL.md#how-to-draw-graphics)
 - [How to Draw Text Graphics](Instructions_HowTo_withLVLLVL.md#how-to-draw-text-graphics)
 - [IMPORTANT: How to prevent memory leakage with `deleteUnusedGraphics()`](Instructions_HowTo_withLVLLVL.md#important-how-to-prevent-memory-leakage-with-deleteunusedgraphics)
+- [How to Manually Delete Graphics](Instructions_withLVLLVL.md#deletegraphic) (redirects to `deleteGraphic()`)
+- [How to Modify Graphics](Instructions_withLVLLVL.md#settile) (redirects to `setTile()`)
+
 ## How To Draw Graphics
 In your `draw` loop...
 1. Create or retrieve a graphic using [`getGraphic()`](Instructions_withLVLLVL.md#getGraphic)
