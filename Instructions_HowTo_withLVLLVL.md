@@ -39,7 +39,7 @@ function draw(){
 }
 ```
 ## IMPORTANT: How to prevent memory leakage with `deleteUnusedGraphics()`
-If unused graphics are not deleted, they may quickly pile up (especially text graphics), which can drastically slow down or freeze your sketch.
+If unused graphics are not deleted, they may quickly pile up (especially text graphics*), which can drastically slow down or freeze your sketch.
 
 In your `draw` loop...
 1. Before any graphics are updated, call your TileRenderer's `setGraphicsToUnused()` method.
@@ -69,3 +69,4 @@ function draw(){
   
 }
 ```
+*A new text graphic is created every time the text changes when you call `getTextGraphic()`. For example, if you call `getTextGraphic()` to display the frame rate (as is done in the provided [example sketch](Instructions_withLVLLVL.md#example-sketch)), a new graphic will be created every time the frame rate changes.
