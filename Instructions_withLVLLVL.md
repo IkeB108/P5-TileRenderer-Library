@@ -42,13 +42,13 @@ function setup(){
 
 ## How To Draw Graphics
 In your `draw` loop...
-1. Create or retrieve a graphic using [`getGraphic()`](Instructions_withLVLLVL.md#getGraphic)
+1. Create or retrieve a graphic using [`getGraphic()`](#getGraphic)
     - First argument: a name for your graphic (string; can be anything)
-    - Second argument: a layer object retrieved using the TileRenderer's [`getLayer()` method](Instructions_withLVLLVL.md#getlayer)
-    - Third argument (optional): should be an object containing settings for your graphic. [See here.](Instructions_withLVLLVL.md#getGraphic)
-2. Call the graphic's [`update()`](Instructions_withLVLLVL.md#update) method so that it will start or continue rendering
+    - Second argument: a layer object retrieved using the TileRenderer's [`getLayer()` method](#getlayer)
+    - Third argument (optional): should be an object containing settings for your graphic. [See here.](#getGraphic)
+2. Call the graphic's [`update()`](#update) method so that it will start or continue rendering
 3. Draw the graphic to the canvas using p5's `image()` function
-4. Remember to [prevent memory leakage with `deleteUnusedGraphics`](Instructions_HowTo_withLVLLVL.md#important-how-to-prevent-memory-leakage-with-deleteunusedgraphics)
+4. Remember to [prevent memory leakage with `deleteUnusedGraphics`](#important-how-to-prevent-memory-leakage-with-deleteunusedgraphics)
 ```javascript
 //Example
 function draw(){
@@ -63,12 +63,12 @@ In your `setup` function...
 
 Then, in your `draw` loop...
 
-2. Create or retrieve a text graphic using [`getTextGraphic()`](Instructions_withLVLLVL.md#getTextGraphic)
+2. Create or retrieve a text graphic using [`getTextGraphic()`](#getTextGraphic)
     - First argument: the text you wish to display *(a new graphic will be created every time this text changes)*
-    - Second argument (required): an object containing settings for the graphic, including a textColor. [See here.](Instructions_withLVLLVL.md#getTextGraphic)
-3. Call the graphic's [`update()`](Instructions_withLVLLVL.md#update) method so that it will start or continue rendering
+    - Second argument (required): an object containing settings for the graphic, including a textColor. [See here.](#getTextGraphic)
+3. Call the graphic's [`update()`](#update) method so that it will start or continue rendering
 4. Draw the graphic to the canvas using p5's `image()` function
-5. Remember to [prevent memory leakage with `deleteUnusedGraphics`](Instructions_HowTo_withLVLLVL.md#important-how-to-prevent-memory-leakage-with-deleteunusedgraphics)
+5. Remember to [prevent memory leakage with `deleteUnusedGraphics`](#important-how-to-prevent-memory-leakage-with-deleteunusedgraphics)
 ```javascript
 //Example
 function setup(){
@@ -86,7 +86,7 @@ If unused graphics are not deleted, they may quickly pile up (especially text gr
 In your `draw` loop...
 1. Before any graphics are updated, call your TileRenderer's `setGraphicsToUnused()` method.
 2. After all graphics are updated and drawn, call your TileRenderer's `deleteUnusedGraphics()` method
-3. To make a graphic immune to deletion, set its `protected` setting to true in [the graphic's settings](Instructions_withLVLLVL.md#getGraphic)
+3. To make a graphic immune to deletion, set its `protected` setting to true in [the graphic's settings](#getGraphic)
 
 To make sure it worked...
 1. Check how many graphics are in the `graphics` object: `console.log( Object.keys(myTileRenderer.graphics).length )` There should be a reasonable number.
@@ -111,7 +111,7 @@ function draw(){
   
 }
 ```
-**A new text graphic is created every time the text changes when you call `getTextGraphic()`. For example, if you call `getTextGraphic()` to display the frame rate (as is done in the provided [example sketch](Instructions_withLVLLVL.md#example-sketch)), a new graphic will be created every time the frame rate changes. So deleting old text graphics is especially important.*
+**A new text graphic is created every time the text changes when you call `getTextGraphic()`. For example, if you call `getTextGraphic()` to display the frame rate (as is done in the provided [example sketch](#example-sketch)), a new graphic will be created every time the frame rate changes. So deleting old text graphics is especially important.*
 
 
 
@@ -188,7 +188,7 @@ IMPORTANT NOTE: The `getTextGraphic` method requires the TileRenderer's `alphabe
 myTileRenderer.alphabet = "Commodore 64"
 ```
 ### `setGraphicsToUnused() and deleteUnusedGraphics()`
-See [here](Instructions_HowTo_withLVLLVL.md#important-how-to-prevent-memory-leakage-with-deleteunusedgraphics)
+See [here](#important-how-to-prevent-memory-leakage-with-deleteunusedgraphics)
 ### `deleteGraphic()`
 ```javascript
 myTileRenderer.deleteGraphic( graphicName )
@@ -198,7 +198,7 @@ Deletes the graphic named `graphicName` from the `graphics` object (even if the 
 ```javascript
 myTileRenderer.sheetIndexOf( character )
 ```
-Returns the index (in the [tilesheet](Instructions_withLVLLVL.md#the-tilesheet)) of the given character. This method requires the TileRenderer's `alphabet` property to be set to the name of the tileset used in LVL LVL.
+Returns the index (in the [tilesheet](#the-tilesheet)) of the given character. This method requires the TileRenderer's `alphabet` property to be set to the name of the tileset used in LVL LVL.
 - `character`: A string of length 1
 ### `getLayer()`
 ```javascript
@@ -212,7 +212,7 @@ myTileRenderer.importLayers( layersObject )
 ```
 Imports an object that was exported with the TileRenderer's `exportLayers()` method (not meant to import content directly from LVL LVL).
 
-Use this if you want to use a map made with LVL LVL, but with a [tilesheet](Instructions_withLVLLVL.md#the-tilesheet) that is not from LVL LVL.
+Use this if you want to use a map made with LVL LVL, but with a [tilesheet](#the-tilesheet) that is not from LVL LVL.
 
 ### `exportLayers()`
 ```javascript
@@ -286,8 +286,8 @@ propertiesOfNewTile = {
 ```javascript
 myGraphic.locateCharacter( sheetIndex, [tileColor] )
 ```
-Returns an array of tile indeces in the graphic that are set to a particular character. (This character is the character with an index of `sheetIndex` in the [tilesheet](Instructions_withLVLLVL.md#the-tilesheet)). If a `tileColor` is provided (optional), only tiles that have that color will be returned.
-- `sheetIndex`: Integer. Index of the desired character in the [tilesheet](Instructions_withLVLLVL.md#the-tilesheet)
+Returns an array of tile indeces in the graphic that are set to a particular character. (This character is the character with an index of `sheetIndex` in the [tilesheet](#the-tilesheet)). If a `tileColor` is provided (optional), only tiles that have that color will be returned.
+- `sheetIndex`: Integer. Index of the desired character in the [tilesheet](#the-tilesheet)
 - `tileColor`: Integer. Index of a color in the TileRenderer's color palette.
 ### `indexToCoordinates()`
 ```javascript
