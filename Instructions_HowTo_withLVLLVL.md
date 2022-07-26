@@ -2,6 +2,7 @@
 ![Capture](https://user-images.githubusercontent.com/56776763/180682856-cc484d52-4551-4bb3-8644-a7a92b1935c9.PNG)
 - [How to Draw Graphics](Instructions_HowTo_withLVLLVL.md#how-to-draw-graphics)
 - [How to Draw Text Graphics](Instructions_HowTo_withLVLLVL.md#how-to-draw-text-graphics)
+- [IMPORTANT: How to prevent memory leakage with `deleteUnusedGraphics()`](Instructions_HowTo_withLVLLVL.md#important-how-to-prevent-memory-leakage-with-deleteunusedgraphics)
 ## How To Draw Graphics
 In your `draw` loop...
 1. Create or retrieve a graphic using [`getGraphic()`](Instructions_withLVLLVL.md#getGraphic)
