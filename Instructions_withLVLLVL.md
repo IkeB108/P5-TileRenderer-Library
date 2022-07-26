@@ -145,6 +145,8 @@ myTileRenderer.sheet.rowSize //Size (in tiles) of rows in the tile sheet (should
 myTileRenderer.sheet.columnSize //Size (in tiles) of columns in the tile sheet
 myTileRenderer.sheet.renderProgress //How many tiles have been rendered in the sheet so far (tiles only need to render once)
 myTileRenderer.sheet.tilesPerFrame //How many tiles to draw to the sheet per animation frame (defaults to 50)
+
+// ...in addition to the properties that all p5 graphics objects have
 ```
 
 
