@@ -30,8 +30,11 @@ function setup(){
 ## How To...
 ![Capture](https://user-images.githubusercontent.com/56776763/180682856-cc484d52-4551-4bb3-8644-a7a92b1935c9.PNG)
 
-- [How to draw graphics](Instructions_HowTo_withLVLLVL.md#how-to-draw-graphics)
-
+- [How to Draw Graphics](Instructions_HowTo_withLVLLVL.md#how-to-draw-graphics)
+- [How to Draw Text Graphics](Instructions_HowTo_withLVLLVL.md#how-to-draw-text-graphics)
+- [IMPORTANT: How to prevent memory leakage with `deleteUnusedGraphics()`](Instructions_HowTo_withLVLLVL.md#important-how-to-prevent-memory-leakage-with-deleteunusedgraphics)
+- [How to Manually Delete Graphics](Instructions_withLVLLVL.md#deletegraphic) (redirects to `deleteGraphic()`)
+- [How to Modify Graphics](Instructions_withLVLLVL.md#settile) (redirects to `setTile()`)
 
 
 
