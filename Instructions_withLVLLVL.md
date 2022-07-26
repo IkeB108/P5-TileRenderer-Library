@@ -110,7 +110,7 @@ See [here](Instructions_HowTo_withLVLLVL.md#important-how-to-prevent-memory-leak
 ```javascript
 myTileRenderer.deleteGraphic( graphicName )
 ```
-Deletes the graphic named `graphicName` from the `graphics` object. It is recommended to use this method instead of trying to delete the graphic yourself.
+Deletes the graphic named `graphicName` from the `graphics` object (even if the graphic's `protected` setting is set to `true`). It is recommended to use this method instead of trying to delete the graphic yourself.
 ### `sheetIndexOf()`
 ```javascript
 myTileRenderer.sheetIndexOf( character )
