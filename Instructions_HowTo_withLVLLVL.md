@@ -6,6 +6,9 @@
 ## How To Draw Graphics
 In your `draw` loop...
 1. Create or retrieve a graphic using [`getGraphic()`](Instructions_withLVLLVL.md#getGraphic)
+    - First argument: a name for your graphic (string; can be anything)
+    - Second argument: a layer object retrieved using the TileRenderer's [`getLayer()` method](Instructions_withLVLLVL.md#getlayer)
+    - Third argument (optional): should be an object containing settings for your graphic. [See here.](Instructions_withLVLLVL.md#getGraphic)
 2. Call the graphic's [`update()`](Instructions_withLVLLVL.md#update) method so that it will start or continue rendering
 3. Draw the graphic to the canvas using p5's `image()` function
 4. Remember to [prevent memory leakage with `deleteUnusedGraphics`](Instructions_HowTo_withLVLLVL.md#important-how-to-prevent-memory-leakage-with-deleteunusedgraphics)
@@ -24,6 +27,8 @@ In your `setup` function...
 Then, in your `draw` loop...
 
 2. Create or retrieve a text graphic using [`getTextGraphic()`](Instructions_withLVLLVL.md#getTextGraphic)
+    - First argument: the text you wish to display *(a new graphic will be created every time this text changes)*
+    - Second argument (required): an object containing settings for the graphic, including a textColor. [See here.](Instructions_withLVLLVL.md#getTextGraphic)
 3. Call the graphic's [`update()`](Instructions_withLVLLVL.md#update) method so that it will start or continue rendering
 4. Draw the graphic to the canvas using p5's `image()` function
 5. Remember to [prevent memory leakage with `deleteUnusedGraphics`](Instructions_HowTo_withLVLLVL.md#important-how-to-prevent-memory-leakage-with-deleteunusedgraphics)
@@ -69,4 +74,4 @@ function draw(){
   
 }
 ```
-*A new text graphic is created every time the text changes when you call `getTextGraphic()`. For example, if you call `getTextGraphic()` to display the frame rate (as is done in the provided [example sketch](Instructions_withLVLLVL.md#example-sketch)), a new graphic will be created every time the frame rate changes.
+**A new text graphic is created every time the text changes when you call `getTextGraphic()`. For example, if you call `getTextGraphic()` to display the frame rate (as is done in the provided [example sketch](Instructions_withLVLLVL.md#example-sketch)), a new graphic will be created every time the frame rate changes. So deleting old graphics is especially important.*
