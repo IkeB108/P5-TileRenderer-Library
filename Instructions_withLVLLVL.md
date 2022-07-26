@@ -180,7 +180,10 @@ In the graphic, sets the tile at index `tileIndexInGraphic` (or at the coordinat
 ```javascript
 propertiesOfNewTile = {
   sheetIndex: __, //Integer. index (in the tilesheet) of the character that the tile should be set to
-  tileColor: __ //Optional integer. Index of the new desired color in the color palette
+  tileColor: __, //Optional integer. Index of the new desired color in the color palette
+  priority: false, //Optional boolean (default is false). When true, this tile change will be added to
+  //the front of the `tileChangeQueue` and will be rendered before any other tile changes or before
+  //the graphic even finishes fully rendering.
 }
 ```
 ### `getTile()`
@@ -200,7 +203,9 @@ propertiesOfNewTile = {
 ```javascript
 myGraphic.locateCharacter( sheetIndex, [tileColor] )
 ```
-Returns an array of tile indeces in the graphic that are set to a particular character. (This character is the character with an index of `sheetIndex` in the [tilesheet](Instructions_withLVLLVL.md#the-tilesheet)).
+Returns an array of tile indeces in the graphic that are set to a particular character. (This character is the character with an index of `sheetIndex` in the [tilesheet](Instructions_withLVLLVL.md#the-tilesheet)). If a `tileColor` is provided (optional), only tiles that have that color will be returned.
+- `sheetIndex`: Integer. Index of the desired character in the [tilesheet](Instructions_withLVLLVL.md#the-tilesheet)
+- `tileColor`: Integer. Index of a color in the TileRenderer's color palette.
 ### `indexToCoordinates()`
 ```javascript
 myGraphic.indexToCoordinates( tileIndex )
