@@ -40,7 +40,7 @@ myTileRenderer.tileSize //The width and height of each tile in pixels (tiles mus
 myTileRenderer.rendersPerFrame //An integer that stores how many tiles were rendered in the last frame (use for debugging)
 myTileRenderer.alphabet //String -- If you plan to use text graphics, set this to the name of the tileset you used in LVL LVL
 ```
-### `sheet` property:
+### The tilesheet:
 This is an example of what the `myTileRenderer.sheet` graphic looks like. You can draw it in your sketch with `image()`
 
 ![Capture](https://user-images.githubusercontent.com/56776763/180670499-76f6824e-73bf-4701-b297-82fc2e752dcb.PNG)
@@ -87,7 +87,12 @@ myGraphic.layerObject //The layer object that was given when this graphic was cr
 // ...in addition to the properties that all p5 graphics objects have
 ```
 ## Graphics Methods
-Methods of graphics objects stored in the `graphics`:
+Methods of graphics objects stored in `graphics`:
+### `update()`
+```javascript
+myGraphic.update()
+```
+Updates the graphic: renders new tiles, and makes any tile changes in the graphic's `tileChangeQueue`. This should be called once per frame for every graphic being drawn. A graphic will stay blank if its `update()` method is never called.
 ### `setTile()`
 ```javascript
 myGraphic.setTile( tileIndexInGraphic, propertiesOfNewTile )
@@ -102,7 +107,7 @@ In the graphic, sets the tile of index `tileIndexInGraphic` (or at the coordinat
 - `propertiesOfNewTile`: Object, formatted like this:
 ```javascript
 propertiesOfNewTile = {
-  sheetIndex: __, //Integer. index (in the tile sheet) of the character that the tile should be set to
+  sheetIndex: __, //Integer. index (in the tilesheet) of the character that the tile should be set to
   tileColor: __ //Optional integer. Index of the new desired color in the color palette
 }
 ```
@@ -115,7 +120,7 @@ myGraphic.getTile( tileX, tileY )
 Returns an object (formatted like below) containing data about the tile of index `tileIndexInGraphic` or at the coordinates `tileX, tileY`
 ```javascript
 propertiesOfNewTile = {
-  sheetIndex: __, //Integer. index (in the tile sheet) of the character this tile is set to
+  sheetIndex: __, //Integer. index (in the tilesheet) of the character this tile is set to
   tileColor: __ //Optional integer. Index of this tile's color in the color palette
 }
 ```
@@ -123,7 +128,21 @@ propertiesOfNewTile = {
 ```javascript
 myGraphic.locateCharacter( sheetIndex, [tileColor] )
 ```
-Returns an array of tile indeces in the graphic that are set to a particular character. (This character is the character with an index of `sheetIndex` in the [tile sheet](Instructions_withLVLLVL.md#sheet-property)).
+Returns an array of tile indeces in the graphic that are set to a particular character. (This character is the character with an index of `sheetIndex` in the [tilesheet](Instructions_withLVLLVL.md#the-tilesheet)).
+### `indexToCoordinates()`
+```javascript
+myGraphic.indexToCoordinates( tileIndex )
+```
+Given the index of a tile in the graphic, returns the x and y coordinates of that tile.
+- `tileIndex`: Integer. Index (in the graphic) of a tile
+### `coordinatesToIndex()`
+```javascript
+myGraphic.coordinatesToIndex( tileX, tileY )
+```
+Given the x and y coordinates of a tile, returns the index of that tile in the graphic.
+- `tileX`: X coordinate of a tile
+- `tileY`: Y coordinate of a tile
+
 ## Example Sketch
 See this example run live [here](https://ikeb108.github.io/P5-TileRenderer-Library/Example/).
 
