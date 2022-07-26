@@ -94,7 +94,7 @@ myGraphic.setTile( tileIndexInGraphic, propertiesOfNewTile )
 //or...
 myGraphic.setTile( tileX, tileY, propertiesOfNewTile )
 ```
-In the graphic, sets the tile of index `tileIndexInGraphic` or at the coordinates `tileX, tileY` to have the properties in `propertiesOfNewTile`
+In the graphic, sets the tile of index `tileIndexInGraphic` (or at the coordinates `tileX, tileY`) to have the properties in `propertiesOfNewTile`
 
 - `tileIndexInGraphic`: Integer. Index of the tile you wish to change
 - `tileX`: Integer. X coordinate of the tile you wish to change
@@ -102,10 +102,28 @@ In the graphic, sets the tile of index `tileIndexInGraphic` or at the coordinate
 - `propertiesOfNewTile`: Object, formatted like this:
 ```javascript
 propertiesOfNewTile = {
-  sheetIndex: //index (in the tile sheet) of the tile this should be set to
-  tileColor: //Optional. Index of the new desired color in the color palette
+  sheetIndex: __, //Integer. index (in the tile sheet) of the character that the tile should be set to
+  tileColor: __ //Optional integer. Index of the new desired color in the color palette
 }
 ```
+### `getTile()`
+```javascript
+myGraphic.getTile( tileIndexInGraphic )
+//or...
+myGraphic.getTile( tileX, tileY )
+```
+Returns an object (formatted like below) containing data about the tile of index `tileIndexInGraphic` or at the coordinates `tileX, tileY`
+```javascript
+propertiesOfNewTile = {
+  sheetIndex: __, //Integer. index (in the tile sheet) of the character this tile is set to
+  tileColor: __ //Optional integer. Index of this tile's color in the color palette
+}
+```
+### `locateCharacter()`
+```javascript
+myGraphic.locateCharacter( sheetIndex, [tileColor] )
+```
+Returns an array of tile indeces in the graphic that are set to a particular character. (This character is the character with an index of `sheetIndex` in the [tile sheet](Instructions_withLVLLVL.md#sheet-property)).
 ## Example Sketch
 See this example run live [here](https://ikeb108.github.io/P5-TileRenderer-Library/Example/).
 
