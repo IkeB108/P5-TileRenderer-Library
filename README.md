@@ -3,5 +3,5 @@
 
 Renders tile maps (especially those made with https://lvllvl.com) to your P5JS sketch without slowing the framerate. It achieves this by only rendering a few tiles at a time (with plenty of configurable settings).
 
-- [How to Use with LVL LVL](README_withLVLLVL.md)
-- [How to Use without LVL LVL](https://youtube.com)
+- [How to Use with LVL LVL](Instructions_withLVLLVL.md)
+- [How to Use without LVL LVL](Instructions_withoutLVLLVL.md)
