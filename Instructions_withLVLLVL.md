@@ -55,7 +55,7 @@ myTileRenderer.sheet.renderProgress //How many tiles have been rendered in the s
 myTileRenderer.sheet.tilesPerFrame //How many tiles to draw to the sheet per frame (defaults to 50)
 ```
 ## TileRenderer Methods
-### getGraphic()
+### `getGraphic()`
 ```javascript
 myTileRenderer.getGraphic( name, layerObject, [graphicSettingsObject] )
 ```
@@ -87,8 +87,25 @@ myGraphic.layerObject //The layer object that was given when this graphic was cr
 // ...in addition to the properties that all p5 graphics objects have
 ```
 ## Graphics Methods
-Methods of graphics objects stored in the `graphics` array:
+Methods of graphics objects stored in the `graphics`:
+### `setTile()`
+```javascript
+myGraphic.setTile( tileIndexInGraphic, propertiesOfNewTile )
+//or...
+myGraphic.setTile( tileX, tileY, propertiesOfNewTile )
+```
+In the graphic, sets the tile of index `tileIndexInGraphic` or at the coordinates `tileX, tileY` to have the properties in `propertiesOfNewTile`
 
+- `tileIndexInGraphic`: Integer. Index of the tile you wish to change
+- `tileX`: Integer. X coordinate of the tile you wish to change
+- `tileY`: Integer. Y coordinate of the tile you wish to change
+- `propertiesOfNewTile`: Object, formatted like this:
+```javascript
+propertiesOfNewTile = {
+  sheetIndex: //index (in the tile sheet) of the tile this should be set to
+  tileColor: //Optional. Index of the new desired color in the color palette
+}
+```
 ## Example Sketch
 See this example run live [here](https://ikeb108.github.io/P5-TileRenderer-Library/Example/).
 
