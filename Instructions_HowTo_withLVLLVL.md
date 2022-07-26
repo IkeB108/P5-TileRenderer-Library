@@ -74,4 +74,4 @@ function draw(){
   
 }
 ```
-**A new text graphic is created every time the text changes when you call `getTextGraphic()`. For example, if you call `getTextGraphic()` to display the frame rate (as is done in the provided [example sketch](Instructions_withLVLLVL.md#example-sketch)), a new graphic will be created every time the frame rate changes. So deleting old graphics is especially important.*
+**A new text graphic is created every time the text changes when you call `getTextGraphic()`. For example, if you call `getTextGraphic()` to display the frame rate (as is done in the provided [example sketch](Instructions_withLVLLVL.md#example-sketch)), a new graphic will be created every time the frame rate changes. So deleting old text graphics is especially important.*
