@@ -315,7 +315,6 @@ To see this example project in LVL LVL, download the JSON file [here](Example/Lv
 ```javascript
 function preload(){
   //Load a json file that was exported from https://lvllvl.com/
-  //( you can also make one from scratch without LVLLVL )
   myLvlLvlJSON = loadJSON("LvlLvlExport.json")
 }
 
@@ -384,7 +383,7 @@ function draw(){
   myTextGraphic.update();
   image(myTextGraphic, 90, 180 )
   
-  myTileRenderer.deleteUnusedGraphics(); //This feature helps clear out unused graphics (especially important when creating text graphics).
+  myTileRenderer.deleteUnusedGraphics(); //Delete any graphics that weren't updated in the last frame
 }
 ```
 
