@@ -1,18 +1,34 @@
 # P5 TileRenderer Library without LVL LVL
 
+## Your tilesheet image
+The tiles in your tile sheet must all be square and all the same size. There must be no spaces between them. They can have any colors, including transparent colors. Your tilesheet should have an empty tile if you plan to have empty spaces in your tilemap.
+
+This tilesheet from [Kenney NL](https://kenney.nl/) is used in the example sketch at the bottom.
+
+![monochrome-transparent_packed](https://user-images.githubusercontent.com/56776763/181135485-eb912d08-e69e-47d9-85e8-e3741436eacd.png)
+## Your tilemap
+The data for the tilemap / graphic you wish to *render* with your tilesheet is called a **layerObject**. Your TileRenderer can render multiple layerObjects. LayerObjects should follow this format:
+```javascript
+//Example
+myLayer = {
+  label: "city", //String. A name for the layer object
+  gridWidth: 30, //Integer. Width of the grid in tiles
+  gridHeight: 30, //Integer. Height of the grid in tiles
+  data: {
+    tiles: [...], //An integer array that lists what sprite is at each tile (or rather, the index of the sprite in your tilesheet)
+    tileColors: [...], //An integer array that lists the RGBA color values of each tile (should be 4 times the length of the tiles array)
+  }
+}
+```
 ## First Steps
-In LVL LVL, click Export --> JSON. Use the following settings (should be defaults).
-
-![lvllvl_settings](https://user-images.githubusercontent.com/56776763/180666857-cf1057f0-90c7-4c5d-9a8e-3167779d4033.PNG)
-
 Include the tile renderer script in your `index.html` head:
 ```javascript
 <script src="tileRenderer.js" type="text/javascript"></script>
 ```
-In your sketch's `preload()` function, load the JSON file:
+In your sketch's `preload()` function, load the tilesheet image:
 ```javascript
 function preload(){
-  myLvlLvlJSON = loadJSON("lvlllvlexport.json")
+  
 }
 ```
 In your sketch's `setup()` function, create a new TileRenderer using your new JSON object:
@@ -306,81 +322,58 @@ Given the x and y coordinates of a tile, returns the index of that tile in the g
 
 
 ## Example Sketch
-See this example run live [here](https://ikeb108.github.io/P5-TileRenderer-Library/Example/).
+See this example run live [here](https://ikeb108.github.io/P5-TileRenderer-Library/Example_WithoutLVLLVL/).
 
-To see this example project in LVL LVL, download the JSON file [here](Example/LvlLvlExport.json) and import it to LVL LVL.
+See the layerObject data for this sketch [here](https://ikeb108.github.io/P5-TileRenderer-Library/Example_WithoutLVLLVL/myLayer.json)
 ```javascript
 function preload(){
-  //Load a json file that was exported from https://lvllvl.com/
-  //( you can also make one from scratch without LVLLVL )
-  myLvlLvlJSON = loadJSON("LvlLvlExport.json")
+  //Tilesheet image courtesy of Kenney NL https://www.kenney.nl/
+  tilesheetImage = loadImage("monochrome-transparent_packed.png")
+  
+  //Load the layer object (data for our map)
+  myLayer = loadJSON("myLayer.json")
 }
-
 function setup(){
-  createCanvas(500,500)
+  createCanvas(550, 300)
+
+  //Create an instance of the TileRenderer
+  myTileRenderer = new TileRenderer(tilesheetImage, 16)
   
-  //Create a new tile renderer using the json from https://lvllvl.com/
-  myTileRenderer = new TileRenderer(myLvlLvlJSON);
+  //Set the 'alphabet' property so we can use it to draw text using our tileset
+  myTileRenderer.alphabet = {"A":917,"B":918,"C":919,"D":920,"E":921,"F":922,"G":923,"H":924,"I":925,"J":926,"K":927,"L":928,"M":929,"N":966,"O":967,"P":968,"Q":969,"R":970,"S":971,"T":972,"U":973,"V":974,"W":975,"X":1018,"Y":977,"Z":978,"0":868,"1":869,"2":870,"3":871,"4":872,"5":873,"6":874,"7":875,"8":876,"9":877,":":878,".":879,"%":880,"#":1015,"+":1016,"-":1017,"/":1019,"=":1020,"@":1021}
   
-  //The tile renderer automatically creates layer objects from the json data
-  //and stores them in an array called layers.
-  //We will create a graphic using the data from each layer.
-  for(let i in myTileRenderer.layers){
-    let thisLayer = myTileRenderer.layers[i];
-    myTileRenderer.getGraphic(thisLayer.label, thisLayer) //a graphic is created and added to myTileRenderer's array called graphics
-  }
-  
-  frameRateText = "The framerate is " + round(frameRate());
+  frameRateText = "The framerate is " + round(frameRate())
   frameRateText = frameRateText.toUpperCase();
-  
 }
 
 function draw(){
-  background(0);
+  background(0)
   
-  //scaling by an integer like 2 ensures that the tiles will appear exactly as they
-  //do in the original tileset (scaling by a decimal will cause distortion when using noSmooth())
-  scale(2); noSmooth();
-  
-  
-  // Draw a light green background behind the map
-  // ===============================================
-  fill( myTileRenderer.colorPalette[0] )
-  // Get the dimensions of a graphic from myTileRenderer (doesn't matter which, they're all the same)
-  let w = myTileRenderer.graphics["Triangle Background"].width
-  let h = myTileRenderer.graphics["Triangle Background"].height
-  rect(0, 0, w, h)
-  
-  
-  // Draw each graphic from myTileRenderer to the screen
-  // ===============================================
+  //Draw the map graphic to the screen
+  //=====================================================
   myTileRenderer.setGraphicsToUnused(); //This feature will later help delete unused graphics
   
-  for(let i in myTileRenderer.graphics){
-    let thisGraphic = myTileRenderer.graphics[i];
-    if(!thisGraphic.name.includes("FRAMERATE")){ //We don't yet want to draw the framerate graphic (see below)
-      thisGraphic.update();
-      image(thisGraphic, 0, 0)
-    }
-  }
+  let cityGraphic = myTileRenderer.getGraphic("city", myLayer)
+  cityGraphic.update();
+  image(cityGraphic, 0, 0)
   
-  //Create a text graphic that displays the framerate
-  //=========================
-  myTileRenderer.alphabet = "Commodore 64" //Tell the tile renderer which tileset we used in lvllvl.com so that it knows which tile indeces correspond to which letters (only needs to be done once)
-  let myTextSettings = {
-    textColor: 3, //text color must be an index from the color palette when using lvllvl.com
-    widthInCharacters: 10, //text will wrap after 10 characters
-    tilesPerFrame: 1, //Only one tile will be drawn each frame
-  }
+  
+  // Create a text graphic that displays the framerate 
+  //=====================================================
   if(frameCount % 100 == 0){
-    //Once every 100 frames, update the framerate text
     frameRateText = "The framerate is " + round(frameRate())
-    frameRateText = frameRateText.toUpperCase(); //With the Commodore 64 tileset, all letters must be uppercase. This varies depending on the tileset.
+    frameRateText = frameRateText.toUpperCase();
   }
-  myTextGraphic = myTileRenderer.getTextGraphic(frameRateText, myTextSettings)
-  myTextGraphic.update();
-  image(myTextGraphic, 90, 180 )
   
-  myTileRenderer.deleteUnusedGraphics(); //This feature helps clear out unused graphics (especially important when creating text graphics).
+  let myTextSettings = {
+    textColor: color(255),
+    tilesPerFrame: 1
+  }
+  //This will use the TileRenderer's alphabet property that was set in setup()
+  let frameRateTextGraphic = myTileRenderer.getTextGraphic( frameRateText, myTextSettings )
+  frameRateTextGraphic.update();
+  image(frameRateTextGraphic, 50, 250)
+  
+  myTileRenderer.deleteUnusedGraphics(); //Delete any graphics that weren't updated in the last frame
 }
 ```
