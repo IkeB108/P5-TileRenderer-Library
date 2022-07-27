@@ -190,7 +190,7 @@ myTileRenderer.getGraphic( name, layerObject, [graphicSettingsObject] )
 Creates a new p5 graphic named `name` and adds it to the TileRenderer's `graphics` object. Or, if a graphic named `name` already exists, it just returns that graphic. The tiles described in `layerObject` will be drawn to this graphic when its `update()` method is called.
 
 - `name`: String. Name of the graphic to create/retrieve
-- `layerObject`: Object. A layer from the TileRenderer's `layers` array (or one imported with `importLayers()`)
+- `layerObject`: Object. A layer object (can be imported with `importLayers()`
 - `graphicSettingsObject`: Optional Object. Stores your preferred settings for this graphic. It can have any of the properties below (any properties not included default to the values shown below)
 ```javascript
 graphicSettingsObject = {
@@ -210,15 +210,12 @@ Creates a new p5 graphic that will render the text in `textString`, and adds it 
 - `graphicSettingsObject`: Optional. An object with all the same settings options when calling `getGraphic()`, but with two additions:
 ```javascript
 graphicSettingsObject = {
-  textColor: __, //REQUIRED: index of the desired text color in the color palette
+  textColor: __, //REQUIRED: a p5 color object
   widthInCharacters: __, //Optional: For word wrapping, how many characters wide the text is allowed to be (if not set, there will be no word wrapping)
 }
 ```
-IMPORTANT NOTE: The `getTextGraphic` method requires the TileRenderer's `alphabet` property to be set to the name of the tileset used in LVL LVL:
-```javascript
-//Example...
-myTileRenderer.alphabet = "Commodore 64"
-```
+IMPORTANT NOTE: The `getTextGraphic` method requires the TileRenderer's `alphabet` property to be set [(see here)](#your-tilemap-layerobject)
+
 ### `setGraphicsToUnused() and deleteUnusedGraphics()`
 See [here](#important-how-to-prevent-memory-leakage-with-deleteunusedgraphics)
 ### `deleteGraphic()`
@@ -230,27 +227,24 @@ Deletes the graphic named `graphicName` from the `graphics` object (even if the 
 ```javascript
 myTileRenderer.sheetIndexOf( character )
 ```
-Returns the index (in the [tilesheet](#the-tilesheet)) of the given character. This method requires the TileRenderer's `alphabet` property to be set to the name of the tileset used in LVL LVL.
+Returns the index (in the [tilesheet](#your-tilesheet-image)) of the given character. This method requires the TileRenderer's `alphabet` property to be set [(see here)](#your-tilemap-layerobject)
 - `character`: A string of length 1
 ### `getLayer()`
 ```javascript
 myTileRenderer.getLayer( layerLabelOrIndex )
 ```
-Returns the layer object from LVL LVL that is labelled (or has an index of) `layerLabelOrIndex`
-- `layerLabelOrIndex`: A string (name of the layer) or an integer (index of the layer in the TileRenderer's `layers` array)
+This feature is only available if importing data from LVL LVL.
 ### `importLayers()`
 ```javascript
 myTileRenderer.importLayers( layersObject )
 ```
-Imports an object that was exported with the TileRenderer's `exportLayers()` method (not meant to import content directly from LVL LVL).
-
-Use this if you want to use a map made with LVL LVL, but with a [tilesheet](#the-tilesheet) that is not from LVL LVL.
+Imports an object that was exported with the TileRenderer's `exportLayers()` method.
 
 ### `exportLayers()`
 ```javascript
 myTileRenderer.exportLayers( fileName )
 ```
-Exports information about the TileRenderer's layers to a JSON file named `fileName`.
+Exports information about all layerObjects (all that were used to make graphics) to a JSON file named `fileName`.
 - `fileName`: String. Name of the json file that will be downloaded.
 
 
@@ -318,8 +312,8 @@ propertiesOfNewTile = {
 ```javascript
 myGraphic.locateCharacter( sheetIndex, [tileColor] )
 ```
-Returns an array of tile indeces in the graphic that are set to a particular character. (This character is the character with an index of `sheetIndex` in the [tilesheet](#the-tilesheet)). If a `tileColor` is provided (optional), only tiles that have that color will be returned.
-- `sheetIndex`: Integer. Index of the desired character in the [tilesheet](#the-tilesheet)
+Returns an array of tile indeces in the graphic that are set to a particular character. (This character is the character with an index of `sheetIndex` in the [tilesheet](#your-tilesheet-image)). If a `tileColor` is provided (optional), only tiles that have that color will be returned.
+- `sheetIndex`: Integer. Index of the desired character in the [tilesheet](#your-tilesheet-image)
 - `tileColor`: Integer. Index of a color in the TileRenderer's color palette.
 ### `indexToCoordinates()`
 ```javascript
