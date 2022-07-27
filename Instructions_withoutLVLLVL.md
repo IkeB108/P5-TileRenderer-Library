@@ -6,6 +6,7 @@ The tiles in your tile sheet must all be square and all the same size. There mus
 This tilesheet from [Kenney NL](https://kenney.nl/) is used in the example sketch at the bottom.
 
 ![monochrome-transparent_packed](https://user-images.githubusercontent.com/56776763/181135485-eb912d08-e69e-47d9-85e8-e3741436eacd.png)
+
 ## Your tilemap
 The data for the tilemap / graphic you wish to *render* with your tilesheet is called a **layerObject**. Your TileRenderer can render multiple layerObjects. LayerObjects should follow this format:
 ```javascript
@@ -16,10 +17,29 @@ myLayer = {
   gridHeight: 30, //Integer. Height of the grid in tiles
   data: {
     tiles: [...], //An integer array that lists what sprite is at each tile (or rather, the index of the sprite in your tilesheet)
-    tileColors: [...], //An integer array that lists the RGBA color values of each tile (should be 4 times the length of the tiles array)
+    tileColors: [...], //An integer array that lists the RGBA color values of each tile (should be 4 times the length of the tiles array).
+    //NOTE: p5's tint() function will be used to apply colors in the tileColors array. If no tint is desired, set the tile's color to white, i.e. 255, 255, 255, 255
   }
 }
 ```
+
+A tile's index in the tilesheet is its position in the tilesheet if you were to read it from left to right (starting from zero). For example, the tile in the upper-left corner would have an index of 0, then the tile to its right would have an index of 1, etc.
+
+If you plan to render text using from tilesheet using `getTextGraphic()`, you will need to set your TileRenderer's `alphabet` property to an object that maps text characters to indeces in the tilesheet:
+```javascript
+myTileRenderer.alphabet = {
+  "A": 917,
+  "B": 918,
+  "C": 919,
+  //...
+  "a": 401,
+  "b": 402,
+  "c": 403,
+  //...
+  //etc. Map as many or as few characters as you like.
+}
+```
+
 ## First Steps
 Include the tile renderer script in your `index.html` head:
 ```javascript
@@ -28,13 +48,15 @@ Include the tile renderer script in your `index.html` head:
 In your sketch's `preload()` function, load the tilesheet image:
 ```javascript
 function preload(){
-  
+  tilesheetImage = loadImage("myTilesheet.png")
 }
 ```
-In your sketch's `setup()` function, create a new TileRenderer using your new JSON object:
+In your sketch's `setup()` function, create a new TileRenderer.
+- First argument: Your tilesheet image
+- Second argument: The size (width and height) of the tiles in your tilesheet (in pixels)
 ```javascript
 function setup(){
-  myTileRenderer = new TileRenderer(myLvlLvlJSON);
+  myTileRenderer = new TileRenderer( tilesheetImage, 16 );
 }
 ```
 
