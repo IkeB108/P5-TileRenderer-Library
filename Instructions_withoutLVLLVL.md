@@ -16,8 +16,8 @@ myLayer = {
   gridWidth: 30, //Integer. Width of the grid in tiles
   gridHeight: 30, //Integer. Height of the grid in tiles
   data: {
-    tiles: [...], //An integer array that lists what sprite is at each tile (or rather, the index of the sprite in your tilesheet)
-    tileColors: [...], //An integer array that lists the RGBA color values of each tile (should be 4 times the length of the tiles array).
+    tiles: [...], //An array (can optionally be a Uint16Array) that lists what sprite is at each tile (or rather, the index of the sprite in your tilesheet)
+    tileColors: [...], //An array (can optionally be a Uint16Array) that lists the RGBA color values of each tile (should be 4 times the length of the tiles array).
     //NOTE: p5's tint() function will be used to apply colors in the tileColors array. If no tint is desired, set the tile's color to white, i.e. 255, 255, 255, 255
   }
 }
