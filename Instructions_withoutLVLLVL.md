@@ -7,7 +7,7 @@ This tilesheet from [Kenney NL](https://kenney.nl/) is used in the example sketc
 
 ![monochrome-transparent_packed](https://user-images.githubusercontent.com/56776763/181135485-eb912d08-e69e-47d9-85e8-e3741436eacd.png)
 
-## Your tilemap
+## Your tilemap (layerObject)
 The data for the tilemap / graphic you wish to *render* with your tilesheet is called a **layerObject**. Your TileRenderer can render multiple layerObjects. LayerObjects should follow this format:
 ```javascript
 //Example
@@ -79,7 +79,7 @@ function setup(){
 In your `draw` loop...
 1. Create or retrieve a graphic using [`getGraphic()`](#getGraphic)
     - First argument: a name for your graphic (string; can be anything)
-    - Second argument: a layer object retrieved using the TileRenderer's [`getLayer()` method](#getlayer)
+    - Second argument: a [layer object](#your-tilemap-layerobject)
     - Third argument (optional): should be an object containing settings for your graphic. [See here.](#getGraphic)
 2. Call the graphic's [`update()`](#update) method so that it will start or continue rendering
 3. Draw the graphic to the canvas using p5's `image()` function
@@ -94,7 +94,7 @@ function draw(){
 ```
 ## How to Draw Text Graphics
 In your `setup` function...
-1. Set your TileRenderer's `alphabet` property to the name of the tileset you used in LVL LVL
+1. Set your TileRenderer's `alphabet` property [(see here)](#your-tilemap-layerobject)
 
 Then, in your `draw` loop...
 
@@ -157,31 +157,26 @@ function draw(){
 The TileRenderer object comes with the following properties:
 ```javascript
 myTileRenderer.graphics //An array of graphics created with getGraphic() and getTextGraphic()
-myTileRenderer.layers //An array of layers imported from LVL LVL. The layer objects will be slightly different from the layer objects in your JSON file
-myTileRenderer.colorPalette //An array of p5 color objects. Palette is imported from LVL LVL
-myTileRenderer.sheet //A p5 graphic that displays all the tiles in your tileset (see below)
-myTileRenderer.sheetRenderComplete //Boolean storing whether the sheet graphic has fully rendered. No other graphics will be drawn until this is done.
-myTileRenderer.sheetJSON //The JSON file imported from LVL LVL 
-myTileRenderer.sheetTileCount //Integer -- how many tiles are in your tileset
+myTileRenderer.sheet //The p5 image given when the TileRenderer was created
+myTileRenderer.sheetRenderComplete //Boolean; defaults to true when not using LVL LVL
 myTileRenderer.tileSize //The width and height of each tile in pixels (tiles must be square)
 myTileRenderer.rendersPerFrame //An integer that stores how many tiles were rendered in the last animation frame (you can check this for debugging purposes)
-myTileRenderer.alphabet //String -- If you plan to use text graphics, set this to the name of the tileset you used in LVL LVL
+myTileRenderer.alphabet //Object -- If you plan to use text graphics, set this yourself (see "Your Tilemap")
+//myTileRenderer.layers //Only if importing data from LVL LVL
+//myTileRenderer.colorPalette //Only if importing data from LVL LVL
+//myTileRenderer.sheetTileCount //Only if importing data from LVL LVL
 ```
-### The tilesheet:
-This is an example of what the `myTileRenderer.sheet` graphic looks like. You can draw it in your sketch with `image()`
-
-![Capture](https://user-images.githubusercontent.com/56776763/180670499-76f6824e-73bf-4701-b297-82fc2e752dcb.PNG)
-
-The sheet graphic comes with useful properties of its own:
+### Properties added to your tilesheet...
+After you create your TileRenderer, you'll notice your tilesheet image has been given some additional useful properties...
 ```javascript
 myTileRenderer.sheet.positionOf //An object storing the x y coordinates of all tiles in the sheet graphic. Use like so:
 // console.log(myTileRenderer.sheet.positionOf[0]) //Returns the coordinates of the 0th tile: {x: 0, y: 0}
-myTileRenderer.sheet.rowSize //Size (in tiles) of rows in the tile sheet (should be 10 if importing from lvl lvl)
+myTileRenderer.sheet.rowSize //Size (in tiles) of rows in the tile sheet
 myTileRenderer.sheet.columnSize //Size (in tiles) of columns in the tile sheet
-myTileRenderer.sheet.renderProgress //How many tiles have been rendered in the sheet so far (tiles only need to render once)
-myTileRenderer.sheet.tilesPerFrame //How many tiles to draw to the sheet per animation frame (defaults to 50)
+//myTileRenderer.sheet.renderProgress //Only if using LVL LVL
+//myTileRenderer.sheet.tilesPerFrame //Only if using LVL LVL
 
-// ...in addition to the properties that all p5 graphics objects have
+// ...in addition to the properties that all p5 image objects have
 ```
 
 
