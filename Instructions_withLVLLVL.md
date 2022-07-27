@@ -309,9 +309,9 @@ Given the x and y coordinates of a tile, returns the index of that tile in the g
 
 
 ## Example Sketch
-See this example run live [here](https://ikeb108.github.io/P5-TileRenderer-Library/Example/).
+See this example run live [here](https://ikeb108.github.io/P5-TileRenderer-Library/Example_withLVLLVL/).
 
-To see this example project in LVL LVL, download the JSON file [here](Example/LvlLvlExport.json) and import it to LVL LVL.
+To see this example project in LVL LVL, download the JSON file [here](Example_withLVLLVL/LvlLvlExport.json) and import it to LVL LVL.
 ```javascript
 function preload(){
   //Load a json file that was exported from https://lvllvl.com/
