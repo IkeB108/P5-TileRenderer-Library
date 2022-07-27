@@ -3,7 +3,7 @@
 tileRenderer( sheet, tileSize )
 sheet = p5 image of the tile sheet, or
         a 0/1 object like lvl lvl gives you
-tileSize = size of a sprite in pixels
+tileSize = size of a tile in pixels
 
 tileRenderer.sheet = p5 graphic of the base sheet of this tileset 
 tileRenderer.graphics = {
@@ -81,7 +81,7 @@ function TileRenderer( sheet, tileSize ){
   
   if(_sheetType == "p5 image"){
     this.sheet = sheet;
-    this.sheet.rowSize = ceil ( sheet.width / tileSize); //width of image in SPRITES
+    this.sheet.rowSize = ceil ( sheet.width / tileSize); //width of image in TILES
     this.sheet.columnSize = ceil ( sheet.height / tileSize );
     
     this.sheet.positionOf = {};
@@ -109,7 +109,7 @@ function TileRenderer( sheet, tileSize ){
     this.sheet.rowSize = _rowSize;
     this.sheet.columnSize = _columnSize;
     this.sheet.positionOf = {}; //we'll use this to convert symbol indeces to coordinates on the sheet
-    this.spriteCount = sheet.tileSet.tiles.length;
+    this.sheetTileCount = sheet.tileSet.tiles.length;
     //_sheetRenderComplete is still false.
     this.sheet.renderProgress = 0; //index of the tile currently being drawn to the sheet. Rendering should only take a few frames.
     this.sheet.tilesPerFrame = 50;
@@ -123,9 +123,9 @@ function TileRenderer( sheet, tileSize ){
       let rgb = new_col.slice(2, new_col.length)
       this.colorPalette[i] = color("#" + rgb + a)
     }
+    this.sheet.elt.id = "tileRenderer_Sheet_" + round(millis() + random(100))
   }
   
-  this.sheet.elt.id = "tileRenderer_Sheet_" + round(millis() + random(100))
   
   // this.pixelIndexToXY = function( pixelIndex, graphicWidth ){
   //   pixelIndex = floor(pixelIndex/4)
@@ -329,6 +329,15 @@ function TileRenderer( sheet, tileSize ){
         if( layerObj.data.tiles && layerObj.data.tileColors &&
            !(layerObj.data.tiles.length === layerObj.data.tileColors.length || layerObj.data.tiles.length * 4 === layerObj.data.tileColors.length) ){
           console.warn("Warning: In the provided layer object, the tiles and tileColors arrays should meet one of the following conditions:\ntiles.length === tileColors.length\ntiles.length * 4 === tileColors.length")
+        }
+        
+        if( layerObj.data.tiles && layerObj.gridWidth && layerObj.gridHeight){
+          if(layerObj.data.tiles.length !== layerObj.gridWidth * layerObj.gridHeight){
+            console.warn("Warning: The number of tiles in the layer object's tiles array is not equal to the gridWidth * gridHeight ")
+          }
+        }
+        if( _sheetType === "p5 image" && layerObj.data.tileColors.length === layerObj.data.tiles.length ){
+          console.warn("Warning: In the provided layer object, the tileColors array is equal in length to the tiles array, but it should be 4 times the length if not using data from lvl lvl.")
         }
       }
       
@@ -599,7 +608,6 @@ function TileRenderer( sheet, tileSize ){
               let tileDestinationGridX = tileDestinationIndex % g.layerObject.gridWidth;
               let tileDestinationGridY = floor(tileDestinationIndex/g.layerObject.gridWidth);
               
-              
               let sx = thisCopy.sheet.positionOf[tileSourceIndex].x
               let sy = thisCopy.sheet.positionOf[tileSourceIndex].y
               let sw = thisCopy.tileSize;
@@ -629,7 +637,7 @@ function TileRenderer( sheet, tileSize ){
                 let dcolor_g = data.tileColors[tileDestinationIndex * 4 + 1 ]
                 let dcolor_b = data.tileColors[tileDestinationIndex * 4 + 2 ]
                 let dcolor_a = data.tileColors[tileDestinationIndex * 4 + 3 ]
-                dcolor = color(dcolor_r, dcolor_g, dcolor_b)
+                dcolor = color(dcolor_r, dcolor_g, dcolor_b, dcolor_a)
               }
               
               if(dcolor !== null){
