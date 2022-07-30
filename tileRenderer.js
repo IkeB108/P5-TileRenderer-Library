@@ -591,7 +591,9 @@ function TileRenderer( sheet, tileSize ){
               } else {
                 g.noTint();
               }
-              
+              g.erase(); g.noStroke();
+              g.rect(dx, dy, dw, dw)
+              g.noErase();
               g.image( thisCopy.sheet, dx, dy, dw, dw, sx, sy, sw, sw )
               thisCopy.rendersPerFrame ++;
               
