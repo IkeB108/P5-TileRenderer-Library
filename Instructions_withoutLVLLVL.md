@@ -203,11 +203,11 @@ graphicSettingsObject = {
 ```
 ### `getTextGraphic()`
 ```javascript
-myTileRenderer.getTextGraphic( textString, [graphicSettingsObject] )
+myTileRenderer.getTextGraphic( textString, graphicSettingsObject )
 ```
 Creates a new p5 graphic that will render the text in `textString`, and adds it to the TileRenderer's `graphics` object. Or, if a text graphic containing the text in `textString` already exists, it just returns that graphic.
 - `textString`: String. The text to render in the text graphic
-- `graphicSettingsObject`: Optional. An object with all the same settings options when calling `getGraphic()`, but with two additions:
+- `graphicSettingsObject`: Required. An object with all the same settings options when calling `getGraphic()`, but with two additions:
 ```javascript
 graphicSettingsObject = {
   textColor: __, //REQUIRED: a p5 color object
