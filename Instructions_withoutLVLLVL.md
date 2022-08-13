@@ -100,9 +100,9 @@ Then, in your `draw` loop...
 
 2. Create or retrieve a text graphic using [`getTextGraphic()`](#getTextGraphic)
     - First argument: the text you wish to display *(a new graphic will be created every time this text changes)*
-    - Second argument (required): an object containing settings for the graphic, including a textColor. [See here.](#getTextGraphic)
+    - Second argument (optional): an object containing settings for the graphic. [See here.](#gettextgraphic)
 3. Call the graphic's [`update()`](#update) method so that it will start or continue rendering
-4. Draw the graphic to the canvas using p5's `image()` function
+4. Draw the graphic to the canvas using p5's `image()` function (use `tint()` before this step if you want to recolor the text)
 5. Remember to [prevent memory leakage with `deleteUnusedGraphics`](#important-how-to-prevent-memory-leakage-with-deleteunusedgraphics)
 ```javascript
 //Example
@@ -196,6 +196,7 @@ Creates a new p5 graphic named `name` and adds it to the TileRenderer's `graphic
 graphicSettingsObject = {
   tilesPerFrame: 10, //How many tiles from this graphic will be rendered to the screen each animation frame
   protected: false, //When true, graphic will not be deleted by the TileRenderer's deleteUnusedGraphics() method.
+  allWhite: false, //When true, all tiles are rendered with NO TINT ( tile color is ignored )
   tileSize: [defaults to the tile size in the sheet graphic],  //The desired width and height of tiles in this graphic in pixels
   width: [default is calculated based on tileSize], //The desired width of the graphic in pixels
   height: [default is calculated based on tileSize], //The desired height of the graphic in pixels
@@ -205,12 +206,11 @@ graphicSettingsObject = {
 ```javascript
 myTileRenderer.getTextGraphic( textString, graphicSettingsObject )
 ```
-Creates a new p5 graphic that will render the text in `textString`, and adds it to the TileRenderer's `graphics` object. Or, if a text graphic containing the text in `textString` already exists, it just returns that graphic.
+Creates a new p5 graphic that will render the text in `textString`, and adds it to the TileRenderer's `graphics` object (text will be white; use P5's `tint()` to recolor it). Or, if a text graphic containing the text in `textString` already exists, it just returns that graphic.
 - `textString`: String. The text to render in the text graphic
-- `graphicSettingsObject`: Required. An object with all the same settings options when calling `getGraphic()`, but with two additions:
+- `graphicSettingsObject`: Optional. An object with all the same settings options when calling `getGraphic()`, but with one addition:
 ```javascript
 graphicSettingsObject = {
-  textColor: __, //REQUIRED: a p5 color object
   widthInCharacters: __, //Optional: For word wrapping, how many characters wide the text is allowed to be (if not set, there will be no word wrapping)
 }
 ```
@@ -377,7 +377,6 @@ function draw(){
   }
   
   let myTextSettings = {
-    textColor: color(255),
     tilesPerFrame: 1
   }
   //This will use the TileRenderer's alphabet property that was set in setup()
