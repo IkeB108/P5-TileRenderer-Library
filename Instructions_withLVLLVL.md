@@ -65,9 +65,9 @@ Then, in your `draw` loop...
 
 2. Create or retrieve a text graphic using [`getTextGraphic()`](#getTextGraphic)
     - First argument: the text you wish to display *(a new graphic will be created every time this text changes)*
-    - Second argument (required): an object containing settings for the graphic, including a textColor. [See here.](#getTextGraphic)
+    - Second argument (optional): an object containing settings for the graphic. [See here.](#gettextgraphic)
 3. Call the graphic's [`update()`](#update) method so that it will start or continue rendering
-4. Draw the graphic to the canvas using p5's `image()` function
+4. Draw the graphic to the canvas using p5's `image()` function (use `tint()` before this step if you want to recolor the text)
 5. Remember to [prevent memory leakage with `deleteUnusedGraphics`](#important-how-to-prevent-memory-leakage-with-deleteunusedgraphics)
 ```javascript
 //Example
@@ -175,12 +175,11 @@ graphicSettingsObject = {
 ```javascript
 myTileRenderer.getTextGraphic( textString, graphicSettingsObject )
 ```
-Creates a new p5 graphic that will render the text in `textString`, and adds it to the TileRenderer's `graphics` object. Or, if a text graphic containing the text in `textString` already exists, it just returns that graphic.
+Creates a new p5 graphic that will render the text in `textString`, and adds it to the TileRenderer's `graphics` object (text will be white; use P5's `tint()` to recolor it). Or, if a text graphic containing the text in `textString` already exists, it just returns that graphic.
 - `textString`: String. The text to render in the text graphic
-- `graphicSettingsObject`: Required. An object with all the same settings options when calling `getGraphic()`, but with two additions:
+- `graphicSettingsObject`: Optional. An object with all the same settings options when calling `getGraphic()`, but with one addition:
 ```javascript
 graphicSettingsObject = {
-  textColor: __, //REQUIRED: index of the desired text color in the color palette
   widthInCharacters: __, //Optional: For word wrapping, how many characters wide the text is allowed to be (if not set, there will be no word wrapping)
 }
 ```
