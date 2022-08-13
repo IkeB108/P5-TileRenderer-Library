@@ -166,6 +166,7 @@ Creates a new p5 graphic named `name` and adds it to the TileRenderer's `graphic
 graphicSettingsObject = {
   tilesPerFrame: 10, //How many tiles from this graphic will be rendered to the screen each animation frame
   protected: false, //When true, graphic will not be deleted by the TileRenderer's deleteUnusedGraphics() method.
+  allWhite: false, //When true, all tiles are rendered as white
   tileSize: [defaults to the tile size in the sheet graphic],  //The desired width and height of tiles in this graphic in pixels
   width: [default is calculated based on tileSize], //The desired width of the graphic in pixels
   height: [default is calculated based on tileSize], //The desired height of the graphic in pixels
@@ -369,7 +370,6 @@ function draw(){
   //=========================
   myTileRenderer.alphabet = "Commodore 64" //Tell the tile renderer which tileset we used in lvllvl.com so that it knows which tile indeces correspond to which letters (only needs to be done once)
   let myTextSettings = {
-    textColor: 3, //text color must be an index from the color palette when using lvllvl.com
     widthInCharacters: 10, //text will wrap after 10 characters
     tilesPerFrame: 1, //Only one tile will be drawn each frame
   }
@@ -380,6 +380,7 @@ function draw(){
   }
   myTextGraphic = myTileRenderer.getTextGraphic(frameRateText, myTextSettings)
   myTextGraphic.update();
+  tint( myTileRenderer.colorPalette[3] );
   image(myTextGraphic, 90, 180 )
   
   myTileRenderer.deleteUnusedGraphics(); //Delete any graphics that weren't updated in the last frame
